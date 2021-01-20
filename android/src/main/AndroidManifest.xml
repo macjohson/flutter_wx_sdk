@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.huanshao.wx_sdk">
+    <application>
+        <activity android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:taskAffinity="com.chinapeace.lincang"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="微信登录"
+            />
+    </application>
+</manifest>
