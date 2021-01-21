@@ -14,20 +14,25 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
 /** WxSdkPlugin */
-class WxSdkPlugin: FlutterPlugin, EventChannel.StreamHandler {
+class WxSdkPlugin: FlutterPlugin, EventChannel.StreamHandler, MethodCallHandler {
   private lateinit var eventChannel: EventChannel
+  private lateinit var methodChannel: MethodChannel
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    Constant.wxApi = WXAPIFactory.createWXAPI(flutterPluginBinding.applicationContext, Constant.wxAppId)
-    Constant.wxApi.registerApp(Constant.wxAppId)
     eventChannel = EventChannel(flutterPluginBinding.binaryMessenger, "wx_sdk/wx-login")
     eventChannel.setStreamHandler(this)
+
+    methodChannel = MethodChannel(flutterPluginBinding.binaryMessenger, "wx_sdk")
+    methodChannel.setMethodCallHandler(this)
+
+    Constant.wxApi = WXAPIFactory.createWXAPI(flutterPluginBinding.applicationContext, Constant.wxAppId)
+    Constant.wxApi.registerApp(Constant.wxAppId)
   }
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
     eventChannel.setStreamHandler(null)
   }
 
-  override fun onListen(arguments: Any?, events: EventChannel.EventSink) {
+  override fun onListen(arguments: Any?, @NonNull events: EventChannel.EventSink) {
     Constant.events = events
 
     val req = SendAuth.Req()
@@ -39,5 +44,8 @@ class WxSdkPlugin: FlutterPlugin, EventChannel.StreamHandler {
 
   override fun onCancel(arguments: Any?) {
 
+  }
+
+  override fun onMethodCall(call: MethodCall, result: Result) {
   }
 }
