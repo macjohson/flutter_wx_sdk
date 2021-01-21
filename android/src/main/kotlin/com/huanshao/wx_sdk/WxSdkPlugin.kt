@@ -35,6 +35,8 @@ class WxSdkPlugin: FlutterPlugin, EventChannel.StreamHandler, MethodCallHandler 
   override fun onListen(arguments: Any?, @NonNull events: EventChannel.EventSink) {
     Constant.events = events
 
+    events.success("hello")
+
     val req = SendAuth.Req()
 
     req.scope = "snsapi_userinfo"
