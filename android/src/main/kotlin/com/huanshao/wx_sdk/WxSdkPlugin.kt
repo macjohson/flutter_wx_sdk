@@ -12,6 +12,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
 /** WxSdkPlugin */
+<<<<<<< HEAD
 class WxSdkPlugin: FlutterPlugin, EventChannel.StreamHandler, MethodChannel.MethodCallHandler {
   private lateinit var eventChannel: EventChannel
   private lateinit var methodChannel: MethodChannel
@@ -20,11 +21,23 @@ class WxSdkPlugin: FlutterPlugin, EventChannel.StreamHandler, MethodChannel.Meth
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     this.context = flutterPluginBinding.applicationContext
 
+=======
+class WxSdkPlugin: FlutterPlugin, EventChannel.StreamHandler, MethodCallHandler {
+  private lateinit var eventChannel: EventChannel
+  private lateinit var methodChannel: MethodChannel
+  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+>>>>>>> ba727872a524f5879bf1385d3e6a619b1caadd5d
     eventChannel = EventChannel(flutterPluginBinding.binaryMessenger, "wx_sdk/wx-login")
     eventChannel.setStreamHandler(this)
 
     methodChannel = MethodChannel(flutterPluginBinding.binaryMessenger, "wx_sdk")
     methodChannel.setMethodCallHandler(this)
+<<<<<<< HEAD
+=======
+
+    Constant.wxApi = WXAPIFactory.createWXAPI(flutterPluginBinding.applicationContext, Constant.wxAppId)
+    Constant.wxApi.registerApp(Constant.wxAppId)
+>>>>>>> ba727872a524f5879bf1385d3e6a619b1caadd5d
   }
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
@@ -32,13 +45,17 @@ class WxSdkPlugin: FlutterPlugin, EventChannel.StreamHandler, MethodChannel.Meth
     methodChannel.setMethodCallHandler(null)
   }
 
-  override fun onListen(arguments: Any?, events: EventChannel.EventSink) {
+  override fun onListen(arguments: Any?, @NonNull events: EventChannel.EventSink) {
     Constant.events = events
 
+<<<<<<< HEAD
     if(Constant.wxApi == null){
       events.error("-1", "微信sdk未初始化", "微信sdk未初始化，请先调用init方法初始化sdk")
       return
     }
+=======
+    events.success("hello")
+>>>>>>> ba727872a524f5879bf1385d3e6a619b1caadd5d
 
     val req = SendAuth.Req()
 
@@ -51,6 +68,7 @@ class WxSdkPlugin: FlutterPlugin, EventChannel.StreamHandler, MethodChannel.Meth
 
   }
 
+<<<<<<< HEAD
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
     if(call.method == "init-sdk"){
       initWxSdk(call, result)
@@ -144,5 +162,8 @@ class WxSdkPlugin: FlutterPlugin, EventChannel.StreamHandler, MethodChannel.Meth
     
     Constant.wxApi?.sendReq(req)
     result.success(true)
+=======
+  override fun onMethodCall(call: MethodCall, result: Result) {
+>>>>>>> ba727872a524f5879bf1385d3e6a619b1caadd5d
   }
 }
