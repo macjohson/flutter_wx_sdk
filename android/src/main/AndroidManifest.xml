@@ -3,10 +3,20 @@
     <application>
         <activity android:name=".wxapi.WXEntryActivity"
             android:exported="true"
-            android:taskAffinity="com.chinapeace.lincang"
+            android:taskAffinity="${applicationId}"
             android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
             android:label="微信登录"
             />
+        
+        <activity-alias
+            android:name="${applicationId}.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:targetActivity=".wxapi.WXEntryActivity"
+            android:taskAffinity="${applicationId}"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            />
+
     </application>
 </manifest>

@@ -39,7 +39,7 @@ class WXEntryActivity: Activity(), IWXAPIEventHandler {
 
     private fun handleIntent(intent: Intent){
         try{
-            Constant.wxApi.handleIntent(intent, this)
+            Constant.wxApi?.handleIntent(intent, this)
         }catch (e: Exception){
             e.printStackTrace()
             finish()

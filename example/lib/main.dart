@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 
-import 'package:flutter/services.dart';
-import 'package:wx_sdk/wx_sdk.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,8 +24,6 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FlatButton(onPressed: () async{
-                final res = await WxSdk.login();
-                print(res);
               }, child: Text("登录"))
             ],
           ),
